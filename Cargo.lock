@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "SearchEngine"
+name = "searchengine"
 version = "0.1.0"
