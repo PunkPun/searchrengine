@@ -1,0 +1,475 @@
+https://blog.native-instruments.com/synthwave/
+
+Products
+
+Community
+
+Support
+
+Products
+
+Community
+
+Support
+
+Categories
+
+All articles
+
+Production
+
+DJing
+
+Features
+
+Interviews
+
+Tips and tricks
+
+Free stuff
+
+Products
+
+Komplete
+
+Kontakt
+
+Maschine
+
+Massive X
+
+NKS
+
+Reaktor
+
+Traktor
+
+Topics
+
+Beat making
+
+Effects
+
+Sampling
+
+Scoring
+
+Sound design
+
+Synthesis
+
+Video games
+
+Genres
+
+Ambient
+
+Cinematic
+
+Experimental
+
+Hip Hop
+
+House and techno
+
+Pop
+
+Rock
+
+Editions
+
+English
+
+Deutsch
+
+日本語
+
+Français
+
+Español
+
+简体中文
+
+7 quick tips for ambient, atmospheric music
+
+Got the basics down? Here's how to make ambient music that offers a little something extra.
+
+Tips and tricks April 9, 2022
+
+Telefon Tel Aviv: Sound design, sine waves, and why ‘wrong’ is often right
+
+We sit down with Josh Eustis to dissect the sounds and techniques behind Dreams Are Not Enough…
+
+Interviews February 10, 2020
+
+Using TRAKTOR in the studio: How the DJ tool is used to make beats
+
+Discovering the creative powers of TRAKTOR for music production with Huerco S., Konx-om-Pax, and exael.
+
+Traktor July 18, 2019
+
+Eomac and Kyoka are Lena Andersson
+
+Learn about the collaborative project between Irish producer Eomac and the Japanese artist Kyoka.
+
+Interviews June 20, 2019
+
+Secrets of electronic interfaces: Modularity
+
+PUSH TURN MOVE and PATCH & TWEAK author Kim Bjørn explores methods for interfacing with music through hardware and software.
+
+Features February 21, 2019
+
+Thomas Ragsdale on atmospheric, commercial music
+
+Having scored countless advertisements, the UK producer breaks down his studio tools, workflow and tricks.
+
+Komplete November 21, 2018
+
+Richard Devine: A history of making music
+
+Electronic music pioneer discusses his love for REAKTOR BLOCKS, THRILL, and more.
+
+Komplete April 4, 2018
+
+Robert Dudzic: How to be the best at sound design
+
+Acclaimed sound designer Robert Dudzic divulges his secrets on recording, effects, and how to break into the industry.
+
+Interviews July 17, 2017
+
+July 21, 2023 by Tim Cant
+
+What is synthwave music? How to make a synthwave track
+
+Share
+
+Copied!
+
+Synthwave, a genre that surfaced in the 2000s, reinvents the tropes of 80s synth-based music into a new style that features relentless drum machine beats, pulsating synth rhythms, and atmospheric production. The genre can range from slow and goth-tinged to fast and poppy, offering a diverse range of musical experiences. In this beginner’s guide to creating synthwave, we’ll show you how to craft a captivating drum pattern that perfectly embodies the genre’s essence. You’ll then learn how to incorporate a plethora of synth sounds, including bass, lead, and strings, to build a track that captures the nostalgic essence of synthwave that can sound like this:
+
+NativeInstruments · 23 Synthwave Track, Mastered
+
+Jump to these sections:
+
+What is synthwave music?
+
+How to make a synthwave track
+
+Make a drum pattern Sequence a driving synth sound Write a bass line Modulate a synth sweep Use a synth for rhythm Sequence a windy synth Use synth strings Create atmosphere Use a drum fill Utilize sidechain compression Arrange your track Master your track
+
+Follow along with this tutorial using Komplete 14, the ultimate music production suite. Explore Komplete 14 What is synthwave music? The roots of synthwave lie in the millennial French house scene, which saw artists such as Kavinsky and College take the genre’s 80s influence to the next level with tracks such as “Testarossa Autodrive” and “Teenage Color”.
+
+This sound would prove to be influential among non-house artists such as M83 and The Midnight, and it spawned a new synth-centric genre that wasn’t constricted by house’s relatively narrow tempo range and DJ-friendly arrangement requirements.
+
+Synthwave has become very much a part of the mainstream zeitgeist thanks to high-profile synthwave-infused cultural works such as Drive and Stranger Things.
+
+What is the 80s aesthetic called? The popular contemporary 80s-inspired audio-visual aesthetic is known as synthwave, and it combines influences from 80s movies, video games, and synth pop. Why is synthwave popular? One could argue that the reason behind synthwave’s enduring popularity is our continued cultural obsession with 80s nostalgia. As early as 1997, the Adam Sandler comedy “The Wedding Singer” and electro-revival tracks such as I-f’s “Space Invaders Are Smoking Grass” heavily drew inspiration from the then-recently-departed decade.
+
+Since then, 80s nostalgia has been hard to ignore, with house music incorporating 80s tropes non-stop throughout the 2000s.
+
+The soundtrack to 2002’s Grand Theft Audio: Vice City helped bring the sound of the 80s to a new generation, and cultural juggernauts like 2011’s “Drive” and 2016’s “Stranger Things” have only further entrenched the decade as a semi-mystical era of magic and authenticity. If you’re a Millennial or Gen Z, you might not even remember a time when 80s nostalgia wasn’t one of our primary cultural influences, and perhaps this goes some way to explain synthwave’s continued popularity. How to make a synthwave track In this walkthrough on how to make synthwave music we’re going to use Native Instruments’ Neon Drive expansion along with Komplete Kontrol, Battery 4, Massive, Super 8 and Monark plus iZotope Ozone 10 to create an epic synthwave track from scratch. 1. Create a drum pattern Let’s start by setting our project tempo to an unhurried 100 BPM.
+
+Setting the Project Tempo
+
+Add Komplete Kontrol to an instrument track, and in its browser navigate to where the Neon Drive expansion is installed.
+
+The Neon Drive in Komplete Kontrol
+
+If you’re not sure where Neon Drive is installed, open Native Access, click on Neon Drive and select the Installation Path tab on the right to reveal where its files are located.
+
+Neon Drive's install location in Native Access
+
+Open the Sounds > Battery Kits folder, and double-click the Waiting Game Kit preset to load it up.
+
+The Waiting Game Kit
+
+Create a one-bar MIDI clip and sequence C1 kicks on each beat, with D1 snares on the second and fourth beats. Unless otherwise specified, we’ll use velocity values of 100 for everything in this tutorial.
+
+Adding Kicks and Snares
+
+NativeInstruments · 01 Adding Kicks And Snares
+
+Now add G#1 hi-hats on 16th notes with a velocity of 74. Remove the hi-hats on the second and fourth beat to give the snares room to breathe.
+
+Adding hi-hats
+
+NativeInstruments · 02 Adding Hats
+
+For the final touch at another hi-hat with a velocity of 39 on the final 32nd note before the third beat. This gives us a little touch of funk that provides a counterpoint to the otherwise rigid rhythm.
+
+Adding a 32nd note hi-hat
+
+NativeInstruments · 03 Adding 32nd Note Hat
+
+To give us more headroom to add other elements, turn this track’s volume down to -6 dB.
+
+Turning down the drum track
+
+2. Sequence a driving synth sound Naturally for a synthwave track we want some big, sawtooth-based synth sounds. Add another Komplete Kontrol on a new instrument folder, and this time open Neon Drive’s Sounds > Massive Sounds folder. Double-click the Signature preset to load it up.
+
+The Signature preset
+
+Program in a driving rhythm line that plays on 16th notes, playing F1, C2, G#1, A#1 and C2.
+
+The driving synth sequence
+
+NativeInstruments · 04 Driving Synth
+
+Remove the notes that play on the first beat of every bar. This helps emphasize the kick and snares that we placed there.
+
+Removing the notes that play on beat
+
+NativeInstruments · 05 Removing Notes
+
+Balance this with the drum track by setting it to -6 dB.
+
+Balancing the driving synth
+
+NativeInstruments · 06 Driving Synth Balanced
+
+3. Write a bass line Load up Super 8 on a new instrument track. Open the preset browser, click the Bass tag, then click the Circuits preset to load it up.
+
+The Circuits preset
+
+This follows the driving synth part, but it plays on every other 8th note, creating syncopation with the kick drum.
+
+Sequencing the bass synth
+
+NativeInstruments · 07 Bass Synth Sequenced
+
+Set this track to -6 dB to balance it with the other elements.
+
+Balancing the bass synth
+
+NativeInstruments · 08 Bass Synth Balanced
+
+4. Modulate a synth sweep Let’s beef-up our driving and bass synths with an epic sweep. Add Komplete Kontrol on a new instrument track, and this time load up Open Highway from Neon Drive’s Sounds > Massive Sounds folder.
+
+The Open Highway preset
+
+This part follows the driving synth line in simplified form.
+
+The synth sweep sequence
+
+NativeInstruments · 09 Synth Sweep Sequenced
+
+Add some delay and reverb to put the sound in a virtual space.
+
+Processing the sweep synth
+
+NativeInstruments · 10 Processing Synth Sweep
+
+Set this track to -1 dB to balance it with the others.
+
+Balancing the synth sweep
+
+NativeInstruments · 11 Balanced Synth Sweep
+
+5. Use a synth for rhythm We have plenty going on in our mix’s low and mid-range, so let’s focus on the highs next. Load up Reaktor 6 on a new instrument track, and load up Monark from the Player tab. Click the patch list and select the Classic > Neon Delay preset.
+
+The Neon Delay preset
+
+This patch is quite loud, so right away let’s turn it down to -11 dB to balance it with the other elements.
+
+Balancing the rhythm synth
+
+Copy the 16th note pattern we’ve used here that flits between F3, F4, and D#3.
+
+Sequencing the rhythm synth
+
+NativeInstruments · 12 Sequenced Rhythm Synth
+
+Add a high-pass filter and some reverb to take the weight out of the sound and help it sit comfortably in the mix.
+
+Processing the rhythm synth
+
+NativeInstruments · 13 Processed Rhythm Synth
+
+6. Sequence a windy synth Let’s add another high-end sound. On a new instrument track, add Reaktor and again load Monark, but this time load up the Classic > Clarinet instrument.
+
+The Clarinet preset
+
+Again this patch is quite loud, so set it to -15 dB.
+
+Balancing the wind synth
+
+Program in an ostinato that plays F3, D#4, C4, F4 and G#3 on 16th notes as illustrated.
+
+Sequencing the wind synth
+
+NativeInstruments · 14 Wind Synth Sequenced
+
+Again, add a hi-pass filter and a reverb to help the sound sit in the mix.
+
+Processing the wind synth
+
+NativeInstruments · 15 Wind Synth Processed
+
+7. Use synth strings The majority of the sounds we’ve used thus far have been very rhythmic, so let’s add a long, legato synth string sound to give the track some aural variety. On a new instrument track, add Komplete Kontrol and this time load up Shadows from Neon Drive’s Sounds > Massive Sounds folder.
+
+The Shadows preset
+
+Sequence this to play languorous C5 and F4 notes.
+
+The synth string sequence
+
+NativeInstruments · 16 Synth String Sequence
+
+Set the track to -4 dB to balance it with the other elements.
+
+Balancing the synth string
+
+NativeInstruments · 17 Balancing Synth String
+
+8. Create atmosphere Let’s add one final synth element to help us create a compelling arrangement. Add another instrument track, load Komplete Kontrol onto it, and from Neon Drive’s Sounds > Massive Sounds folder load the Westway preset.
+
+The Westway preset
+
+Set this track to -12 dB to balance it with the other parts of the track.
+
+Balancing the atmosphere
+
+Sequence a note that plays F2 for four bars.
+
+Sequencing the atmosphere
+
+NativeInstruments · 18 Sequenced Atmosphere
+
+This adds a touch of rhythmic texture to the proceedings.
+
+9. Use a drum fill Adding a drum fill can help keep our arrangement rolling. Add a new instrument track, and again add Komplete Kontrol. This time open Neon Drive’s Samples > Drums > Tom folder, and drag Tom Digitalo 1 and Tom Digitalo 2 onto an audio track.
+
+Adding tom samples
+
+Set the audio track to -14 dB
+
+Balancing the toms
+
+Play Tom Digitalo 1 on 16ths on the penultimate beat, with Tom Digitalo 2 playing 16ths on the final beat.
+
+The tom fill
+
+NativeInstruments · 19 Tom Fill
+
+Now open the Samples > Drums > Cymbal folder, and drag Crash Digital onto the first beat of a new audio track.
+
+Adding a crash cymbal
+
+Set this track to -16.5 dB.
+
+Balancing the crash cymbal
+
+NativeInstruments · 20 Crash Cymbal Balanced
+
+10. Utilize sidechain compression We want our beats to punch through the mix, so add all tracks excluding the beats to a group.
+
+Creating a sidechain group
+
+Add a compressor to the group track, and set its sidechain input to the drum track. We’re using a Threshold setting of -22 dB here.
+
+Sidechain compression
+
+NativeInstruments · 21 Sidechain Compression
+
+11. Arrange your track For the track arrangement, we start with the Beats and Atmos tracks. The Rhythm synth comes in on bar 5, the Sweep synth comes in on bar 9, and the Wind synth comes in on bar 13. On Bar 17 the Drive and Bass synths enter the fray, with the string elevating things on bar 25. On bar 33 the Wind and String tracks drop out, with the Sweep dropping out on bar 41. Here’s the arrangement in full:
+
+The arrangement in full
+
+NativeInstruments · 22 Arrangement
+
+12. Master your synthwave track To make our track sound loud and full, let’s use iZotope Ozone 10 Maximizer. Add this to your master track, and bring its Threshold down to -7 dB.
+
+iZotope Ozone 10 Maximizer
+
+NativeInstruments · 23 Synthwave Track, Mastered
+
+Start making synthwave today Here we’ve seen how you can make your synthwave track from scratch. If you’d like to learn more check out our guides on music production, beat making, and how to make a dubstep track. For instruments, effects and expansions you might find useful, be sure to investigate the Neon Drive expansion along with Komplete 14, Battery 4, Massive, Super 8, Monark and iZotope Ozone 10. Discover Komplete 14
+
+Share
+
+Copied!
+
+Related articles
+
+What is time stretching? When to use it in music production
+
+Learn how to use time stretching techniques in music production to add texture, synchronize beats, create smooth transitions, and more.
+
+Production February 9, 2024
+
+How to add depth to your music with textures and patterns
+
+Learn how to bring emotion and atmosphere into your music with textures and patterns included in Schema: Light, an intuitive…
+
+Production February 7, 2024
+
+How to make an immersive chillstep track with atmospheric vibes
+
+Discover the soothing melodies and atmospheric beats of chillstep music and learn how to make it in this step-by-step tutorial.
+
+Production January 30, 2024
+
+How to make electro swing music that blends retro vibes with modern production
+
+Learn about the unique characteristics of electro swing music, its history, as well as how to make electro swing music…
+
+Production January 22, 2024
+
+How to make a melodic techno track
+
+Learn what melodic techno music is and how to make a melodic techno track that features melodic progressions, atmospheric sounds,…
+
+Komplete January 3, 2024
+
+How to make future funk music
+
+Explore what makes future funk unique and get expert guidance on crafting your own tracks, covering beats, basslines, synths, and…
+
+Production December 13, 2023
+
+How to make a neofolk song with traditional instruments
+
+Discover the magic of neofolk music and learn how to make your own neofolk song with Spotlight Collection: Ireland, using…
+
+Production December 11, 2023
+
+5 ways to use free vocal samples in your music
+
+Learn five ways to use free vocal samples in your own productions. Plus, learn where to get vocal samples and…
+
+Production December 7, 2023
+
+Home
+
+Products
+
+Community
+
+Support
+
+Careers
+
+© 2024 Native Instruments GmbH
+
+Legal Information
+
+Privacy Policy
+
+Contact
+
+Cookie notice We use cookies and similar technologies to recognize your preferences, as well as to measure the effectiveness of campaigns and analyze traffic.
+
+Manage cookies
+
+Essential cookies
+
+Analytics & Performance
+
+Advertising
+
+Social Media
+
+Learn more about cookies
+
+Accept and continue
