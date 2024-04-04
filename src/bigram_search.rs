@@ -7,7 +7,7 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 
 struct FileIndex {
-    name: String,
+    filename: String,
     link: String,
 }
 
@@ -36,7 +36,7 @@ pub fn run_boolean_bigram_search_engine(path: &Path) {
         } else {
             for index in file_indices {
                 if let Some(file) = files.get(index as usize) {
-                    println!("File: {}, link: {}", file.name, file.link);
+                    println!("File: {}, link: {}", file.filename, file.link);
                 }
             }
         }
@@ -128,7 +128,7 @@ fn read_files(path: &Path, files: &mut Vec<FileIndex>, indices: &mut HashMap<Str
 		}
 
         for bigram in words.windows(2).map(|w| (&w[0], &w[1])) {
-            let bigram_str = &*format!("{} {}", *bigram.0, *bigram.1);
+            let bigram_str = format!("{} {}", *bigram.0, *bigram.1);
             bigrams.entry(bigram_str.to_string()).or_insert_with(HashSet::new).insert(*file_count);
         }
 
@@ -138,7 +138,7 @@ fn read_files(path: &Path, files: &mut Vec<FileIndex>, indices: &mut HashMap<Str
             .into_owned();
 
         files.push(FileIndex {
-            name,
+            filename: name,
             link,
         });
 
