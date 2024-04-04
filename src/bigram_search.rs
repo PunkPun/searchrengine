@@ -51,45 +51,61 @@ fn search_indices_with_bigrams(indices: &HashMap<String, HashSet<i32>>, bigrams:
 		phrase: &str) -> Vec<i32> {
 	let words: Vec<&str> = phrase.split_whitespace().collect();
 
-	let mut bigram_results: Vec<i32> = Vec::new();
-	for bigram in words.windows(2).map(|w| (w[0], w[1])) {
-		let bigram_str = format!("{} {}", bigram.0, bigram.1);
-		if let Some(indices_set) = bigrams.get(&sanitize_word(&bigram_str)) {
-			bigram_results.extend(indices_set.iter().cloned());
-		}
-	}
-
-	let mut word_results: Vec<i32> = Vec::new();
-	if let Some(first_word) = words.first() {
-        let result = indices.get(&sanitize_word(first_word)).cloned().unwrap_or_default();
-
-        for word in words.iter().skip(1) {
-            if let Some(indices_set) = indices.get(&sanitize_word(word)) {
-                word_results.extend(result.intersection(indices_set).cloned());
-            } else {
-                break;
-            }
-        }
-
-       word_results.extend(result);
-    }
-
 	let mut unique_results: HashSet<i32> = HashSet::new();
 	let mut dedup_bigram_results: Vec<i32> = Vec::new();
 
-	for result in bigram_results {
+	for result in search_bigrams_and(bigrams, words.clone()) {
 		if unique_results.insert(result) {
 			dedup_bigram_results.push(result);
 		}
 	}
 
-	for result in word_results {
+	for result in search_indices_and(indices, words.clone()) {
 		if unique_results.insert(result) {
 			dedup_bigram_results.push(result);
 		}
 	}
 
 	dedup_bigram_results
+}
+
+fn search_indices_and(indices: &HashMap<String, HashSet<i32>>, words: Vec<&str>) -> HashSet<i32> {
+    if let Some(first_word) = words.first() {
+        let mut result = indices.get(&sanitize_word(first_word)).cloned().unwrap_or_default();
+
+        for word in words.iter().skip(1) {
+            if let Some(indices_set) = indices.get(&sanitize_word(word)) {
+                result = result.intersection(indices_set).cloned().collect();
+            } else {
+                return HashSet::new();
+            }
+        }
+
+        result
+    } else {
+        HashSet::new()
+    }
+}
+
+fn search_bigrams_and(bigrams: &HashMap<String, HashSet<i32>>, words: Vec<&str>) -> HashSet<i32> {
+	let bi_grams: Vec<(&str, &str)> = words.windows(2).map(|w| (w[0], w[1])).collect();
+	if let Some(first_bigram) = bi_grams.first() {
+		let bigram_str = format!("{} {}", first_bigram.0, first_bigram.1);
+        let mut result = bigrams.get(&sanitize_word(&*bigram_str)).cloned().unwrap_or_default();
+
+        for bigram in bi_grams.iter().skip(1) {
+			let bigram_str = format!("{} {}", bigram.0, bigram.1);
+            if let Some(indices_set) = bigrams.get(&sanitize_word(&*bigram_str)) {
+                result = result.intersection(indices_set).cloned().collect();
+            } else {
+                return HashSet::new();
+            }
+        }
+
+		result
+    } else {
+        HashSet::new()
+    }
 }
 
 fn read_files(path: &Path, files: &mut Vec<FileIndex>, indices: &mut HashMap<String, HashSet<i32>>,
