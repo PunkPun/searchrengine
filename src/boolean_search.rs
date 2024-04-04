@@ -70,10 +70,12 @@ fn read_files(path: &Path, files: &mut Vec<FileIndex>, indices: &mut HashMap<Str
         *file_count += 1;
         let mut file = fs::File::open(&path)
             .unwrap_or_else(|err| panic!("Unable to open file {}: {}", path.display(), err));
-        let mut lines = String::new();
-        file.read_to_string(&mut lines)
+
+        let mut text = String::new();
+        file.read_to_string(&mut text)
             .unwrap_or_else(|err| panic!("Unable to read file {}: {}", path.display(), err));
-        let mut lines = lines.lines();
+        
+        let mut lines = text.lines();
         let link = lines.next().unwrap_or("").to_string();
         
         for line in lines {
