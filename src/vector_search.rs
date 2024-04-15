@@ -1,9 +1,9 @@
-use std::fs;
-use std::io::{self, Write};
-use std::i32;
-use std::path::Path;
-use std::io::prelude::*;
 use std::collections::HashMap;
+use std::fs;
+use std::i32;
+use std::io::prelude::*;
+use std::io::{self, Write};
+use std::path::Path;
 
 struct FileIndex {
     name: String,
@@ -35,10 +35,10 @@ pub fn run_vector_search_engine(path: &Path) {
         let phrase = phrase.trim();
 
         if phrase.is_empty() {
-            break
+            break;
         }
 
-		let file_indices = search_indices(&indices, phrase);
+        let file_indices = search_indices(&indices, phrase);
         if file_indices.is_empty() {
             println!("No results found for phrase: {}", phrase);
         } else {
@@ -52,11 +52,10 @@ pub fn run_vector_search_engine(path: &Path) {
 }
 
 fn search_indices(indices: &HashMap<String, Index>, phrase: &str) -> Vec<i32> {
-    
     let mut result = Vec::new();
     let words: Vec<&str> = phrase.split_whitespace().collect();
     let mut query: HashMap<i32, f32> = HashMap::new();
-    
+
     for word in words {
         let word = sanitize_word(word);
         let index = indices.get(&word);
@@ -83,9 +82,26 @@ fn sanitize_word(word: &str) -> String {
     word.to_lowercase()
 }
 
-fn read_files(path: &Path, files: &mut Vec<FileIndex>, indices: &mut HashMap<String, Index>, file_count: &mut i32, log: f32) {
+fn sanitize_and_split_word(word: &str) -> Vec<String> {
+    let sanitized: String = word
+        .chars()
+        .map(|c| if c.is_alphanumeric() { c } else { ' ' })
+        .collect();
+
+    sanitized
+        .split_whitespace()
+        .map(|s| s.to_lowercase())
+        .collect()
+}
+
+fn read_files(
+    path: &Path,
+    files: &mut Vec<FileIndex>,
+    indices: &mut HashMap<String, Index>,
+    file_count: &mut i32,
+    log: f32,
+) {
     if path.is_file() {
-        *file_count += 1;
         let mut file = fs::File::open(&path)
             .unwrap_or_else(|err| panic!("Unable to open file {}: {}", path.display(), err));
 
@@ -100,27 +116,40 @@ fn read_files(path: &Path, files: &mut Vec<FileIndex>, indices: &mut HashMap<Str
         for line in lines {
             for word in line.split_whitespace() {
                 let word = sanitize_word(word);
-                let count = word_count.entry(word).or_insert(0);
+                let sanitized_and_split_word = sanitize_and_split_word(&*word);
+                let count = word_count.entry(word.to_string()).or_insert(0);
                 *count += 1;
+
+                if word != sanitized_and_split_word.join("") {
+                    for split_word in sanitized_and_split_word {
+                        let count = word_count.entry(split_word).or_insert(0);
+                        *count += 1;
+                    }
+                }
             }
         }
 
         for (word, count) in word_count {
             let tf = 1.0 + (count as f32).log(log);
-            indices.entry(word.to_string())
-                .or_insert(Index { idf: 0.0, tf: HashMap::new() })
-                .tf.insert(*file_count, tf);
+            indices
+                .entry(word.to_string())
+                .or_insert(Index {
+                    idf: 0.0,
+                    tf: HashMap::new(),
+                })
+                .tf
+                .insert(*file_count, tf);
         }
-        
-        let name = path.strip_prefix("Engines")
+
+        *file_count += 1;
+
+        let name = path
+            .strip_prefix("Engines")
             .unwrap_or(&path)
             .to_string_lossy()
             .into_owned();
 
-        files.push(FileIndex {
-            name,
-            link,
-        });
+        files.push(FileIndex { name, link });
     } else if path.is_dir() {
         let entries = fs::read_dir(path)
             .unwrap_or_else(|err| panic!("Unable to read directory {}: {}", path.display(), err));
