@@ -19,12 +19,12 @@ pub fn run_vector_search_engine(path: &Path) {
     let mut files: Vec<FileIndex> = Vec::new();
     let mut indices: HashMap<String, Index> = HashMap::new();
     let mut file_count = 0;
-    let log = 4.0;
-    read_files(&path, &mut files, &mut indices, &mut file_count, log);
+    let base_log = 4.0;
+    read_files(path, &mut files, &mut indices, &mut file_count, base_log);
 
     for index in indices.values_mut() {
         let doc_count = index.tf.len() as f32;
-        index.idf = (file_count as f32 / doc_count).log(log);
+        index.idf = (file_count as f32 / doc_count).log(base_log);
     }
 
     loop {
@@ -52,23 +52,26 @@ pub fn run_vector_search_engine(path: &Path) {
 }
 
 fn search_indices(indices: &HashMap<String, Index>, phrase: &str) -> Vec<i32> {
-    let mut result = Vec::new();
-    let words: Vec<&str> = phrase.split_whitespace().collect();
     let mut query: HashMap<i32, f32> = HashMap::new();
 
+    let words: Vec<String> = phrase
+        .split_whitespace()
+        .map(sanitize_word)
+        .filter(|w| !w.is_empty())
+        .collect();
+
     for word in words {
-        let word = sanitize_word(word);
-        let index = indices.get(&word);
-        index.map(|index| {
+        if let Some(index) = indices.get(&word) {
             let idf = index.idf;
             for (file, tf) in &index.tf {
                 let tf = *tf;
                 let score = query.entry(*file).or_insert(0.0);
                 *score += tf * idf;
             }
-        });
+        }
     }
 
+    let mut result = Vec::new();
     let mut query: Vec<_> = query.iter().collect();
     query.sort_by(|a, b| b.1.partial_cmp(a.1).unwrap_or(std::cmp::Ordering::Equal));
     for (file, _) in query {
@@ -102,7 +105,7 @@ fn read_files(
     log: f32,
 ) {
     if path.is_file() {
-        let mut file = fs::File::open(&path)
+        let mut file = fs::File::open(path)
             .unwrap_or_else(|err| panic!("Unable to open file {}: {}", path.display(), err));
 
         let mut text = String::new();
@@ -116,7 +119,7 @@ fn read_files(
         for line in lines {
             for word in line.split_whitespace() {
                 let word = sanitize_word(word);
-                let sanitized_and_split_word = sanitize_and_split_word(&*word);
+                let sanitized_and_split_word = sanitize_and_split_word(&word);
                 let count = word_count.entry(word.to_string()).or_insert(0);
                 *count += 1;
 
@@ -145,7 +148,7 @@ fn read_files(
 
         let name = path
             .strip_prefix("Engines")
-            .unwrap_or(&path)
+            .unwrap_or(path)
             .to_string_lossy()
             .into_owned();
 
