@@ -1,15 +1,19 @@
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs;
+use std::fs::File;
 use std::i32;
 use std::io::prelude::*;
 use std::io::{self, Write};
 use std::path::Path;
 
+#[derive(Serialize, Deserialize)]
 struct FileIndex {
     name: String,
     link: String,
 }
 
+#[derive(Serialize, Deserialize)]
 struct Index {
     idf: f32,
     tf: HashMap<i32, f32>,
@@ -26,6 +30,8 @@ pub fn run_vector_search_engine(path: &Path) {
         let doc_count = index.tf.len() as f32;
         index.idf = (file_count as f32 / doc_count).log(base_log);
     }
+
+    serialize_indices_to_yaml(&indices, "indices.yaml").unwrap();
 
     loop {
         print!("Enter a phrase: ");
@@ -159,4 +165,15 @@ fn read_files(
             read_files(&entry.path(), files, indices, file_count, log);
         }
     }
+}
+
+fn serialize_indices_to_yaml(
+    indices: &HashMap<String, Index>,
+    filename: &str,
+) -> std::io::Result<()> {
+    let serialized = serde_yaml::to_string(indices).unwrap();
+    let mut file = File::create(filename)?;
+    file.write_all(serialized.as_bytes())?;
+
+    Ok(())
 }
