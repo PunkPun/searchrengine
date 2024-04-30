@@ -54,13 +54,11 @@ pub fn run_vector_search_engine(path: &Path) {
 fn search_indices(indices: &HashMap<String, Index>, phrase: &str) -> Vec<i32> {
     let mut query: HashMap<i32, f32> = HashMap::new();
 
-    let words: Vec<String> = phrase
+    for word in phrase
         .split_whitespace()
         .map(sanitize_word)
         .filter(|w| !w.is_empty())
-        .collect();
-
-    for word in words {
+    {
         if let Some(index) = indices.get(&word) {
             let idf = index.idf;
             for (file, tf) in &index.tf {
