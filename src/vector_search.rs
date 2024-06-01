@@ -1,16 +1,13 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs;
-use std::fs::File;
-use std::i32;
-use std::io::prelude::*;
-use std::io::{self, Write};
+use std::io::{self, prelude::Read, prelude::Write};
 use std::path::Path;
 
 #[derive(Serialize, Deserialize)]
 struct FileIndex {
-    name: String,
-    link: String,
+    name: Box<str>,
+    link: Box<str>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -21,7 +18,7 @@ struct Index {
 
 pub fn run_vector_search_engine(path: &Path) {
     let mut files: Vec<FileIndex> = Vec::new();
-    let mut indices: HashMap<String, Index> = HashMap::new();
+    let mut indices: HashMap<Box<str>, Index> = HashMap::new();
     let mut file_count = 0;
     let base_log = 4.0;
     read_files(path, &mut files, &mut indices, &mut file_count, base_log);
@@ -57,7 +54,7 @@ pub fn run_vector_search_engine(path: &Path) {
     }
 }
 
-fn search_indices(indices: &HashMap<String, Index>, phrase: &str) -> Vec<i32> {
+fn search_indices(indices: &HashMap<Box<str>, Index>, phrase: &str) -> Vec<i32> {
     let mut query: HashMap<i32, f32> = HashMap::new();
 
     for word in phrase
@@ -85,11 +82,11 @@ fn search_indices(indices: &HashMap<String, Index>, phrase: &str) -> Vec<i32> {
     result
 }
 
-fn sanitize_word(word: &str) -> String {
-    word.to_lowercase()
+fn sanitize_word(word: &str) -> Box<str> {
+    word.to_lowercase().into_boxed_str()
 }
 
-fn sanitize_and_split_word(word: &str) -> Vec<String> {
+fn sanitize_and_split_word(word: &str) -> Vec<Box<str>> {
     let sanitized: String = word
         .chars()
         .map(|c| if c.is_alphanumeric() { c } else { ' ' })
@@ -97,14 +94,14 @@ fn sanitize_and_split_word(word: &str) -> Vec<String> {
 
     sanitized
         .split_whitespace()
-        .map(|s| s.to_lowercase())
+        .map(|s| s.to_lowercase().into_boxed_str())
         .collect()
 }
 
 fn read_files(
     path: &Path,
     files: &mut Vec<FileIndex>,
-    indices: &mut HashMap<String, Index>,
+    indices: &mut HashMap<Box<str>, Index>,
     file_count: &mut i32,
     log: f32,
 ) {
@@ -117,17 +114,18 @@ fn read_files(
             .unwrap_or_else(|err| panic!("Unable to read file {}: {}", path.display(), err));
 
         let mut lines = text.lines();
-        let link = lines.next().unwrap_or("").to_string();
+        let link = Box::<str>::from(lines.next().unwrap_or(""));
 
-        let mut word_count: HashMap<String, u32> = HashMap::new();
+        let mut word_count: HashMap<Box<str>, u32> = HashMap::new();
         for line in lines {
             for word in line.split_whitespace() {
                 let word = sanitize_word(word);
                 let sanitized_and_split_word = sanitize_and_split_word(&word);
-                let count = word_count.entry(word.to_string()).or_insert(0);
+                let identical = word == sanitized_and_split_word.join("").into_boxed_str();
+                let count = word_count.entry(word).or_insert(0);
                 *count += 1;
 
-                if word != sanitized_and_split_word.join("") {
+                if identical {
                     for split_word in sanitized_and_split_word {
                         let count = word_count.entry(split_word).or_insert(0);
                         *count += 1;
@@ -139,7 +137,7 @@ fn read_files(
         for (word, count) in word_count {
             let tf = 1.0 + (count as f32).log(log);
             indices
-                .entry(word.to_string())
+                .entry(word)
                 .or_insert(Index {
                     idf: 0.0,
                     tf: HashMap::new(),
@@ -150,11 +148,12 @@ fn read_files(
 
         *file_count += 1;
 
-        let name = path
-            .strip_prefix("Engines")
-            .unwrap_or(path)
-            .to_string_lossy()
-            .into_owned();
+        let name = Box::<str>::from(
+            path.strip_prefix("Engines")
+                .unwrap_or(path)
+                .to_str()
+                .unwrap_or(""),
+        );
 
         files.push(FileIndex { name, link });
     } else if path.is_dir() {
@@ -168,12 +167,11 @@ fn read_files(
 }
 
 fn serialize_indices_to_yaml(
-    indices: &HashMap<String, Index>,
+    indices: &HashMap<Box<str>, Index>,
     filename: &str,
-) -> std::io::Result<()> {
-    let serialized = serde_yaml::to_string(indices).unwrap();
-    let mut file = File::create(filename)?;
-    file.write_all(serialized.as_bytes())?;
+) -> Result<(), Box<dyn std::error::Error>> {
+    let serialized = serde_yaml::to_string(indices)?;
+    std::fs::write(filename, serialized)?;
 
     Ok(())
 }
